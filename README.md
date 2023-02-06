@@ -1,0 +1,1 @@
+The AirBnB clone project, the console is a team project with the ALX software engineering school till the end of the first year, the goal is to build a simple copy of the AirBnB website and deploy on our server, it makes use of several concepts we have dealt with in previous projects
