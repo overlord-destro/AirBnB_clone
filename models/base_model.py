@@ -1,12 +1,19 @@
 #!/usr/bin/python3
-"""BaseModel class from which all other classes inherit"""
+"""Base module with methods common to all the modules that inherit from it"""
 
 from uuid import uuid4
 from datetime import datetime, timedelta
 
 
 class BaseModel():
-"""BaseModel class from which all other classes inherit"""
+    """Base class
+
+    Description:
+        This class is the base model from which all other models
+        inherit properties. It hosts all the attributes or methods
+        that are common to the other classes
+
+    """
 
     def __init__(self, *args, **kwargs):
         """Initialise class
