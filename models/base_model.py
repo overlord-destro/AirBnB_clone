@@ -1,48 +1,73 @@
 #!/usr/bin/python3
 """BaseModel class from which all other classes inherit"""
 
-
 from uuid import uuid4
 from datetime import datetime, timedelta
 
 
 class BaseModel():
+
     def __init__(self, *args, **kwargs):
+        """Initialise class
+
+        Description:
+            This method initialises the class with id, and the date
+            and time the instance is created and updated.
+
         """
-        Constructor for the BaseModel class
-        """
+
         if len(kwargs) != 0:
             for k, v in kwargs.items():
                 if k != "__class__":
-                    if k == "created_at" or k == "updated_at":
+                    if k in ("created_at", "updated_at"):
                         setattr(self, k, datetime.fromisoformat(v))
                     else:
                         setattr(self, k, v)
         else:
             self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
+        """Print string representation of model
+
+        Description:
+            This method prints a string representation of the model
+            instance. The printed data include name of the class,
+            the id of the instance model and a dictionary of other
+            attributes of the model instance
+
         """
-        Returns string representation of Instance of BaseModel classs
-        """
-        output = "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
-        return output
+
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        """Update date time value
+
+        Description:
+            This method updates the updated_at date time value for this
+            model. It changes to the current date time anytime the
+            model is updated
+
         """
-        Updates updated_at variable to moment of usage
-        """
+
         self.updated_at = datetime.now()
 
     def to_dict(self):
+        """Create dictionary representation
+
+        Description:
+            This method creates a dictionary representation of the
+            model instance. This dictionary contains the name of the
+            class, the date and time it was created and last updated.
+
+        Returns:
+            A dictionary representation of the model instance
+
         """
-        Returns dictionary representaion of instance with all attributes
-        """
+
         newdict = self.__dict__.copy()
         newdict['__class__'] = self.__class__.__name__
         newdict['created_at'] = self.__dict__['created_at'].isoformat()
         newdict['updated_at'] = self.__dict__['updated_at'].isoformat()
+
         return newdict
