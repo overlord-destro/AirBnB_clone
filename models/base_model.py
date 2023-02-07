@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 
 
 class BaseModel():
+"""BaseModel class from which all other classes inherit"""
 
     def __init__(self, *args, **kwargs):
         """Initialise class
