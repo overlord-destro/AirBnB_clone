@@ -65,10 +65,14 @@ class FileStorage:
             This method deserialises a json file to an instance of the
             model. If the file does not exist, nothing happens
         """
-
         try:
-            with open(self.__file_path, encoding="UTF-8") as file:
-                for obj in json.loads(file).values():
-                    self.new(eval(obj["__class__"])(**obj))
+            with open(self.__file_path, "r", encoding="UTF-8") as file:
+                data = json.load(file)
+
+                for key, value in data.items():
+                    class_name = value.get("__class__")
+                    obj = eval(class_name + "(**value)")
+                    self.__objects[key] = obj
+
         except FileNotFoundError:
             return
