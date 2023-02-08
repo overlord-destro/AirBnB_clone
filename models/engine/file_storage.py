@@ -50,7 +50,7 @@ class FileStorage:
             This method serialises the model instance to a JSON file
 
         """
-        
+
         object_storage = {}
 
         with open(self.__file_path, "w", encoding="UTF-8") as file:
