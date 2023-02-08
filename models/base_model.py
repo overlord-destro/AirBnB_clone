@@ -24,6 +24,8 @@ class BaseModel():
 
         """
 
+        from models import storage
+
         if len(kwargs) != 0:
             for k, v in kwargs.items():
                 if k != "__class__":
@@ -34,6 +36,7 @@ class BaseModel():
         else:
             self.id = str(uuid4())
             self.created_at = self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """Print string representation of model
@@ -57,8 +60,10 @@ class BaseModel():
             model is updated
 
         """
+        from models import storage
 
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Create dictionary representation
