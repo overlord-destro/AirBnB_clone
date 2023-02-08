@@ -2,7 +2,7 @@
 """Base module with methods common to all the modules that inherit from it"""
 
 from uuid import uuid4
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class BaseModel():
@@ -24,7 +24,7 @@ class BaseModel():
 
         """
 
-        #from models import storage
+        from models import storage
 
         if len(kwargs) != 0:
             for k, v in kwargs.items():
@@ -36,7 +36,7 @@ class BaseModel():
         else:
             self.id = str(uuid4())
             self.created_at = self.updated_at = datetime.now()
-            #storage.new(self)
+            storage.new(self)
 
     def __str__(self):
         """Print string representation of model
@@ -63,7 +63,7 @@ class BaseModel():
         from models import storage
 
         self.updated_at = datetime.now()
-        #storage.save()
+        storage.save()
 
     def to_dict(self):
         """Create dictionary representation

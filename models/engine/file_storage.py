@@ -50,11 +50,12 @@ class FileStorage:
             This method serialises the model instance to a JSON file
 
         """
+        
+        object_storage = {}
 
         with open(self.__file_path, "w", encoding="UTF-8") as file:
-            object_storage = {}
 
-            for key, value in self.__objects:
+            for key, value in self.__objects.items():
                 object_storage[key] = value.to_dict()
             json.dump(object_storage, file)
 
