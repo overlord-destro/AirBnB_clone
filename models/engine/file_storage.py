@@ -59,3 +59,19 @@ class FileStorage:
                 object_storage[key] = value.to_dict()
             json.dump(object_storage, file)
 
+    def reload(self):
+        """Deserialise object
+
+        Description:
+            This method deserialises a json file to an instance of the
+            model. If the file does not exist, nothing hapens
+
+        """
+
+        with open(self.__file_path, mode="r", encoding="UTF-8") as file:
+            data = json.load(file)
+
+            for key, value in data.items():
+                class_name = value.get("__class__")
+                obj = eval(class_name + "(**value)")
+                self.__objects[key] = obj
