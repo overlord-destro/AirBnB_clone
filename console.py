@@ -3,10 +3,13 @@
 
 import cmd
 from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """Class for command line interface"""
+
+    objects = {"BaseModel": BaseModel}
 
     prompt = "(hbnb) "
 
@@ -63,6 +66,36 @@ class HBNBCommand(cmd.Cmd):
                 print(inst.id)
         else:
             print("** class name missing **")
+
+    def do_show(self, params):
+        """Print instance representation
+
+        Description:
+            This method prints the string representation of an instance
+            based on the class name and the id. It splits the elements
+            in the args parameter into a list. It then assigns the list
+            elements to named variables with which will be used to
+            fetch instance data
+
+        """
+
+        values = params.split(" ")
+        object_name = values[0]
+        object_id = values[1]
+
+        if not object_name:
+            print("** class name missing **")
+        elif object_name not in HBNBCommand.objects:
+            print("** class doesn't exist **")
+        elif not object_id:
+            print("** instance id missing **")
+        else:
+            try:
+                objs = object_name + "." + object_id
+                inst_obj = storage._FileStorage__objects[objs]
+                print(inst_obj)
+            except KeyError:
+                print("** no instance found **")
 
 
 #   ======================================================================
