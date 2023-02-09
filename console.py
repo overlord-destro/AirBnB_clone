@@ -44,6 +44,26 @@ class HBNBCommand(cmd.Cmd):
 
         pass
 
+    def do_create(self):
+        """Create new instance of BaseModel
+
+        Description:
+            This method creates a new instance of the base model when
+            invoked and prints its id to the stdout. If the parameter
+            is not equivalent to class BaseModel, it prints an enrror
+            message '*** class doesn't exist ** '
+        """
+
+        if line:
+            if line != "BaseModel":
+                print("** class doesn't exist **")
+            else:
+                inst = BaseModel()
+                inst.save()
+                print(inst.id)
+        else:
+            print("** class name missing **")
+
 
 #   ======================================================================
 
