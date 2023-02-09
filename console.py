@@ -97,6 +97,34 @@ class HBNBCommand(cmd.Cmd):
             except KeyError:
                 print("** no instance found **")
 
+    def do_destroy(self, params):
+        """Delete an instance
+
+        Description:
+            This method deletes an instance based on the class name
+            and the id. It implements the same approach as the do_show,
+            deletes an instance by its id and updates the file with the
+            save() method from the file storage class
+        """
+
+        values = params.split(" ")
+        object_name = values[0]
+        object_id = values[1]
+
+        if not object_name:
+            print("** class name missing **")
+        elif object_name not in HBNBCommand.objects:
+            print("** class doesn't exist **")
+        elif not object_id:
+            print("** instance id missing **")
+        else:
+            try:
+                objs = object_name + "." + object_id
+                del storage.all()[objs]
+                storage.save()
+            except KeyError:
+                print("** no instance found **")
+
 
 #   ======================================================================
 
