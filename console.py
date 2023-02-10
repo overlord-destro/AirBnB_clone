@@ -97,6 +97,7 @@ class HBNBCommand(cmd.Cmd):
             except KeyError:
                 print("** no instance found **")
 
+
     def do_destroy(self, params):
         """Delete an instance
 
@@ -124,6 +125,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             except KeyError:
                 print("** no instance found **")
+
 
 
 #   ======================================================================
