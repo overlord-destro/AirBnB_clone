@@ -36,7 +36,8 @@ class HBNBCommand(cmd.Cmd):
                 "all": self.do_all,
                 "show": self.do_show,
                 "destroy": self.do_destroy,
-                "update": self.do_update
+                "update": self.do_update,
+                "count": self.do_count
                 }
 
         values = param.split(".", 1)
@@ -217,6 +218,25 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 storage.all()[objs].save()
+
+    def do_count(self, param):
+        """Count objects
+
+        Description:
+            This method counts for the number of instances of a
+            class
+        """
+
+        values = param.split()
+        count = 0
+
+        if len(values) > 0:
+            for obj in storage.all():
+                if obj.startswith(values[0]):
+                    count += 1
+
+            print(count)
+
 
 
 #   ======================================================================
