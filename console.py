@@ -5,13 +5,17 @@ import cmd
 import shlex
 
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """Class for command line interface"""
 
-    objects = {"BaseModel": BaseModel}
+    objects = {
+            "BaseModel": BaseModel,
+            "User": User
+            }
 
     prompt = "(hbnb) "
 
@@ -60,10 +64,10 @@ class HBNBCommand(cmd.Cmd):
         """
 
         if line:
-            if line != "BaseModel":
+            if line not in HBNBCommand.objects:
                 print("** class doesn't exist **")
             else:
-                inst = BaseModel()
+                inst = HBNBCommand.objects[line]()
                 inst.save()
                 print(inst.id)
         else:
