@@ -27,6 +27,9 @@ class HBNBCommand(cmd.Cmd):
             "Review": Review
             }
 
+    obj_methods = ['create', 'show', 'update', 'all', 'destroy',
+                   'count']
+
     prompt = "(hbnb) "
 
     def do_quit(self, line):
