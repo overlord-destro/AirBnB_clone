@@ -2,6 +2,8 @@
 """Command line interface implementation"""
 
 import cmd
+import shlex
+
 from models.base_model import BaseModel
 from models import storage
 
@@ -80,16 +82,17 @@ class HBNBCommand(cmd.Cmd):
         """
 
         values = params.split(" ")
-        object_name = values[0]
-        object_id = values[1]
 
-        if not object_name:
+        if not values[0]:
             print("** class name missing **")
-        elif object_name not in HBNBCommand.objects:
+        elif values[0] not in HBNBCommand.objects:
             print("** class doesn't exist **")
-        elif not object_id:
+        elif len(values) < 2:
             print("** instance id missing **")
         else:
+            object_name = values[0]
+            object_id = values[1]
+
             try:
                 objs = object_name + "." + object_id
                 inst_obj = storage._FileStorage__objects[objs]
@@ -108,16 +111,17 @@ class HBNBCommand(cmd.Cmd):
         """
 
         values = params.split(" ")
-        object_name = values[0]
-        object_id = values[1]
 
-        if not object_name:
+        if not values[0]:
             print("** class name missing **")
-        elif object_name not in HBNBCommand.objects:
+        elif values[0] not in HBNBCommand.objects:
             print("** class doesn't exist **")
-        elif not object_id:
+        elif not values[1]:
             print("** instance id missing **")
         else:
+            object_name = values[0]
+            object_id = values[1]
+
             try:
                 objs = object_name + "." + object_id
                 del storage.all()[objs]
@@ -133,22 +137,50 @@ class HBNBCommand(cmd.Cmd):
             instances either based on the instance name or not.
         """
         values = param.split(" ")
-        object_name = values[0]
 
-        print("[\"", end="")
         if param != "":
-            if object_name not in HBNBCommand.objects:
+            if values[0] not in HBNBCommand.objects:
                 print("** class doesn't exist **")
             else:
                 for k, v in storage.all().items():
                     print(v, end="")
-                print("\"]")
 
         else:
+            object_name = values[0]
+
             for k, v in storage.all().items():
                 if k.startswith(object_name):
                     print(v, end="")
-            print("\"]")
+
+    def do_update(self, param):
+        """Update an instance
+
+        Description:
+            This method updates an instance of a model based on the
+            class name and id. Usuage:
+
+            update <class name> <id> <attribute name> "<attribute value>
+        """
+
+        values = shlex.split(param)
+
+        if len(param) < 1:
+            print("** class name missing **")
+        elif values[0] not in HBNBCommand.objects:
+            print("** class doesn't exist **")
+        elif len(param) < 2:
+            print("** instance id missing **")
+        else:
+            objs = values[0] + "." + values[1]
+
+            if objs not in storage.all():
+                print("** no instance found **")
+            elif len(param) < 3:
+                print("** attribute name missing **")
+            elif len(param) < 4:
+                print("** value missing **")
+            else:
+                storage.all()[objs].save()
 
 
 #   ======================================================================
