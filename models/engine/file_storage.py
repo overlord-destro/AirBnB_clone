@@ -2,6 +2,7 @@
 """JSON file management module"""
 
 import json
+import os
 
 from models.base_model import BaseModel
 from models.user import User
@@ -74,10 +75,11 @@ class FileStorage:
 
         """
 
-        with open(self.__file_path, mode="r", encoding="UTF-8") as file:
-            data = json.load(file)
-
-            for key, value in data.items():
-                class_name = value.get("__class__")
-                obj = eval(class_name + "(**value)")
-                self.__objects[key] = obj
+        if os.path.exists(self.__file_path) is True:
+            with open(self.__file_path, mode="r", encoding="UTF-8") as file:
+                data = json.load(file)
+                
+                for key, value in data.items():
+                    class_name = value.get("__class__")
+                    obj = eval(class_name + "(**value)")
+                    self.__objects[key] = obj
