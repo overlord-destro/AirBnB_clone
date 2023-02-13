@@ -29,6 +29,28 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def default(self, param):
+        """Default method"""
+
+        cmds = {
+                "all": self.do_all,
+                "show": self.do_show,
+                "destroy": self.do_destroy,
+                "update": self.do_update
+                }
+
+        values = param.split(".", 1)
+        obj_name = values[0]
+
+        if obj_name in self.objects and len(values) >= 2:
+            values = "".join(values[1:]).split("(")
+            obj_method = values[0]
+            if obj_method in cmds and len(values) >= 2:
+                obj_args = " ".join(tuple("".join(values[1:])[:-1].split(", ")))
+                cmds[obj_method]("{} {}".format(obj_name, obj_args))
+        else:
+            print("Unknown syntax: {}".format(param))
+
     def do_quit(self, line):
         """Quits console
 
