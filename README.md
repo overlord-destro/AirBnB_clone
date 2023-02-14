@@ -8,7 +8,7 @@ This is a project by a team of two trainees at the ALX software engineering scho
 This project is focused on creating a command interpreter that manages the AirBnb objects.
 
 ## Environement
-The console was built in Ubuntu 14.04LTS using python3
+The console was built in Ubuntu 20.04LTS using python3
 
 ## Requirements
 To run the console, you need; Knowledge in python3, a computer with Ubuntu installed and knowledge of using a command line interpreter
