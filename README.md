@@ -18,7 +18,7 @@ To install and use the console; Clone the repo and run ./console.py
 ```
 $ git clone https://github.com/------/AirBnB_clone.git
 ```
-## Usage
+## Usage :
 | -------------- | --------------------- |
 |   **Method**   |   **Description**   |
 |[create](./console.py) | Creates object of chosen class |
