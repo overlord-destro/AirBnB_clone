@@ -9,3 +9,6 @@ This project is focused on creating a command interpreter that manages the AirBn
 
 ## Environement
 The console was built in Ubuntu 14.04LTS using python3
+
+## Requirements
+To run the console, you need; Knowledge in python3, a computer with Ubuntu installed and knowledge of using a command line interpreter
