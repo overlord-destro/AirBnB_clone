@@ -6,3 +6,6 @@ This is a project by a team of two trainees at the ALX software engineering scho
 
 ## Focus
 This project is focused on creating a command interpreter that manages the AirBnb objects.
+
+## Environement
+The console was built in Ubuntu 14.04LTS using python3
