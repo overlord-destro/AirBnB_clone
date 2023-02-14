@@ -19,7 +19,7 @@ To install and use the console; Clone the repo and run ./console.py
 $ git clone https://github.com/------/AirBnB_clone.git
 ```
 ## Usage
-
+| -------------- | --------------------- |
 |   **Method**   |   **Description**   |
 |[create](./console.py) | Creates object of chosen class |
 |[show](./console.py) | Prints the string representation of an instance based on the class name and id |
