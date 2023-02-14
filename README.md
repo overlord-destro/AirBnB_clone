@@ -14,7 +14,9 @@ The console was built in Ubuntu 14.04LTS using python3
 To run the console, you need; Knowledge in python3, a computer with Ubuntu installed and knowledge of using a command line interpreter
 
 ## Installation
-To install the console; Clone the repo and run ./console.py
+To install and use the console; Clone the repo and run ./console.py
 ```
 $ git clone https://github.com/------/AirBnB_clone.git
 ```
+
+
